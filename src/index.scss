@@ -1,0 +1,182 @@
+@import 'modern-normalize/modern-normalize.css';
+
+// Основные цвета
+$color-primary: #4369d9; // главный цвет: кнопки, ссылки, акценты
+$color-bg: #c2e0f2; // фон страницы или секций
+$color-accent: #95a617; // акцент: активные элементы, выделения
+$color-warning: #e49072; // предупреждения, второстепенные кнопки
+$color-surface: #bfab6f; // карточки, нейтральный фон внутри блоков
+
+// Дополнительно
+$color-text-dark: #222; // основной текст
+$color-text-light: #fff; // текст на тёмном фоне
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: $color-bg;
+  color: $color-text-dark;
+  font-size: 62.5%;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100dvh;
+  width: 100dvw;
+  margin-top: 1rem;
+}
+
+.h1 {
+  font-size: 2.4rem;
+  margin: 1rem 0;
+}
+.h2 {
+  font-size: 2rem;
+  margin: 0;
+}
+.h3 {
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.timers-list {
+  margin-left: 0;
+  border-top: #222 solid 1px;
+}
+
+.timer-table {
+  margin-top: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: #222 solid 1px;
+  &__list {
+    list-style: none;
+    padding: 0;
+    margin-top: 1rem;
+  }
+
+  &__item {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+    margin-top: 0.2rem;
+  }
+  .text {
+    font-size: 0.8rem;
+  }
+}
+
+.timer-start {
+  margin-top: 2rem;
+
+  &__controls {
+    display: flex;
+    justify-content: start;
+    gap: 2rem;
+    align-items: center;
+  }
+}
+
+.btn {
+  background-color: $color-primary;
+  padding: 0.3rem 0.6rem;
+  border-radius: 0.5rem;
+  border: none;
+  color: $color-text-light;
+
+  &--main {
+    font-size: 1.4rem;
+  }
+  &--delete {
+    background-color: $color-warning;
+    color: $color-text-dark;
+  }
+}
+
+.tik-tak {
+  font-size: 1.5rem;
+}
+
+.message {
+  font-size: 1rem;
+  margin-top: 1rem;
+  &--error {
+    color: $color-warning;
+  }
+}
+
+.total-minutes {
+  font-size: 1.2rem;
+  margin-top: 1rem;
+  color: $color-primary;
+}
+
+.total-days-minutes {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-top: 3rem;
+  color: $color-text-dark;
+}
+
+// модальные окна
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3); /* полупрозрачный фон */
+  backdrop-filter: blur(4px); /* блюр заднего содержимого */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* Само модальное окно */
+.modal {
+  background-color: white;
+  padding: 1.5rem 2rem;
+  border-radius: 10px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  min-width: 300px;
+  max-width: 90%;
+  z-index: 1001;
+
+  &__text {
+    font-size: 1rem;
+    
+  }
+}
+
+/* Кнопки внутри */
+.modal__buttons {
+  margin-top: 1.2rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.modal__buttons .btn {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+    font-size: 1rem;
+  font-weight: 500;
+}
+
+.modal__buttons .btn:first-child {
+  background: #cce1ff;
+  color: #004d99;
+  border: none;
+}
+
+.modal__buttons .btn--delete {
+  background: #ff6b6b;
+  color: white;
+  border: none;
+}
