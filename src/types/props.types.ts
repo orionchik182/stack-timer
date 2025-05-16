@@ -5,4 +5,5 @@ export interface TimerProps {
   day: string
   dayTimers: Timer[]
   children: ReactNode
+  lastKey?: string
 }

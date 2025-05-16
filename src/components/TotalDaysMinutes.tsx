@@ -19,7 +19,7 @@ export default function TotalDaysMinutes({ timers }: { timers: Timer[] }) {
 
   return (
     <div className="total-days-minutes">
-      Общая сумма времени за все дни: {hours} ч {mins} мин
+      Общее время за все дни: {hours} ч {mins} мин
     </div>
   )
 }

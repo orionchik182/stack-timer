@@ -42,6 +42,7 @@ body {
 }
 
 .timers-list {
+  width: 19rem;
   margin-left: 0;
   border-top: #222 solid 1px;
 }
@@ -50,6 +51,7 @@ body {
   margin-top: 1.5rem;
   padding-bottom: 1rem;
   border-bottom: #222 solid 1px;
+
   &__list {
     list-style: none;
     padding: 0;
@@ -127,15 +129,17 @@ body {
 }
 
 .total-minutes {
-  font-size: 1.2rem;
+  font-size: 1rem;
   margin-top: 1rem;
   color: $color-primary;
+  text-align: center;
 }
 
 .total-days-minutes {
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: 600;
-  margin: 2rem 0;
+  margin: 3rem 0;
+  text-align: center;
   color: $color-text-dark;
 }
 
@@ -196,4 +200,27 @@ body {
   background: #ff6b6b;
   color: white;
   border: none;
+}
+
+.ant-collapse {
+  &-content {
+    &-box {
+      padding: 0 !important;
+    }
+  }
+
+  &-header-text {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: $color-text-dark;
+  }
+}
+
+:where(.ant-collapse-content) {
+  background-color: $color-bg !important;
+  padding: 0 !important;
+}
+
+:where(.ant-collapse-content-box) {
+  background-color: $color-bg !important;
 }
