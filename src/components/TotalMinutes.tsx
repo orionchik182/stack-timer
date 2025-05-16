@@ -8,6 +8,7 @@ type Timer = {
 export default function TotalMinutes({ timers }: { timers: Timer[] }) {
   const totalMinutes = timers.reduce((sum, t) => {
     if (t.timerStart && t.timerEnd) {
+      console.log('start:', t.timerStart, 'end:', t.timerEnd)
       return sum + getDuration(t.timerStart, t.timerEnd)
     }
     return sum

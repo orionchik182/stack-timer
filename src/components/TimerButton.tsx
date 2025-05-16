@@ -34,10 +34,7 @@ export function TimerButton() {
   }
 
   const handleStart = () => {
-    const now = new Date().toLocaleTimeString([], {
-      hour: '2-digit',
-      minute: '2-digit',
-    })
+    const now = new Date().toTimeString().slice(0, 5)
 
     addTimer.mutate(now, {
       onSuccess: (newTimer) => {
@@ -59,10 +56,7 @@ export function TimerButton() {
   }
 
   const handleStop = async () => {
-    const now = new Date().toLocaleTimeString([], {
-      hour: '2-digit',
-      minute: '2-digit',
-    })
+    const now = new Date().toTimeString().slice(0, 5)
 
     if (elapsedSeconds < 60) {
       // ❌ Удаляем созданный ранее таймер
