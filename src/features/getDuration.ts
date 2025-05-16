@@ -1,8 +1,8 @@
 export function getDuration(start: string, end: string): number {
-  const today = new Date().toISOString().split('T')[0]
-  const startDate = new Date(`${today} ${start}`)
-  const endDate = new Date(`${today} ${end}`)
+  const clean = (time: string) => time.replace(/\u202f|\u00a0/g, '').trim()
 
-  const diffMs = endDate.getTime() - startDate.getTime()
-  return Math.round(diffMs / 60000)
+  const [sh, sm] = clean(start).split(':').map(Number)
+  const [eh, em] = clean(end).split(':').map(Number)
+
+  return eh * 60 + em - (sh * 60 + sm)
 }
