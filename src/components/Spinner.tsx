@@ -3,7 +3,7 @@ import { Flex, Spin } from 'antd'
 
 const Spinner: React.FC = () => {
   return (
-    <div>
+    <div className='spinner'>
       <Flex align="center" gap="middle">
         <Spin size="large" />
       </Flex>

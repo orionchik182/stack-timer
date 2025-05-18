@@ -7,3 +7,12 @@ export interface TimerProps {
   children: ReactNode
   lastKey?: string
 }
+
+export interface OnlyChildren {
+  children: ReactNode
+}
+
+export interface Login {
+  email: string
+  password: string
+}
