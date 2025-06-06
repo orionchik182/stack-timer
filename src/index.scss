@@ -286,45 +286,45 @@ body {
   background-color: $color-bg !important;
 }
 
-// Стили для пагинации
-/* НЕактивная страница */
-.ant-pagination .ant-pagination-item {
-  border: 1px solid $color-primary;
-  background-color: $color-surface;
-}
+/* Стили для минималистичного (simple) пагинатора */
 
-.ant-pagination .ant-pagination-item a {
-  color: $color-text-dark;
-}
+.ant-pagination-simple {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-/* Наведение на неактивную */
-.ant-pagination .ant-pagination-item:hover {
-  background-color: $color-surface;
-  border-color: $color-surface;
-}
+  gap: 0.5rem;
+  font-size: 1rem;
+  margin-top: 1rem;
 
-.ant-pagination .ant-pagination-item:hover a {
-  color: $color-text-light;
-}
+  .ant-pagination-simple-pager input {
+    width: 2.5rem;
+    height: 2rem;
+    text-align: center;
+    background-color: $color-bg !important;
+    color: $color-text-dark;
+    font-size: 1rem;
+    margin-right: -0.8rem;
 
-/* АКТИВНАЯ страница */
-.ant-pagination .ant-pagination-item-active {
-  background-color: $color-primary;
-  border-color: $color-primary;
-}
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+    line-height: 2rem; // это для вертикального центрирования
+    padding: 0 !important; // на всякий случай убираем внутренние отступы
+  }
 
-.ant-pagination .ant-pagination-item-active a {
-  color: $color-text-light;
-}
+  .ant-pagination-prev,
+  .ant-pagination-next {
+    color: $color-primary;
 
-/* Стрелки */
-.ant-pagination .ant-pagination-prev,
-.ant-pagination .ant-pagination-next {
-  color: $color-primary;
-}
-
-.ant-pagination .ant-pagination-prev:hover,
-.ant-pagination .ant-pagination-next:hover {
-  color: $color-primary;
-  border-color: $color-primary;
+    &:hover {
+      color: $color-text-light;
+      background-color: $color-primary;
+      border-radius: 5px;
+    }
+  }
+  .ant-pagination-prev {
+    margin-right: -0.5rem;
+    transform: translateY(1px);
+  }
 }

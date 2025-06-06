@@ -49,13 +49,15 @@ export function TimersList() {
         ))}
 
       {totalPages > 1 && (
-        <Pagination
-          current={currentPage}
-          pageSize={PAGE_SIZE}
-          total={entries.length}
-          onChange={(page) => setCurrentPage(page)}
-          style={{ textAlign: 'center', marginTop: '20px' }}
-        />
+        <div className='pagination'>
+          <Pagination
+            simple
+            current={currentPage}
+            pageSize={PAGE_SIZE}
+            total={entries.length}
+            onChange={(page) => setCurrentPage(page)}
+          />
+        </div>
       )}
     </div>
   )
