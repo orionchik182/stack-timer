@@ -5,10 +5,21 @@ import supabase from '../services/supabase'
 
 const STORAGE_KEY = 'activeTimer'
 
+function calculateEndTime(start: string, elapsed: number) {
+  const [sh, sm] = start.split(':').map(Number)
+  const total = sh * 3600 + sm * 60 + elapsed
+  const hours = Math.floor(total / 3600) % 24
+  const minutes = Math.floor((total % 3600) / 60)
+  return `${hours.toString().padStart(2, '0')}:${minutes
+    .toString()
+    .padStart(2, '0')}`
+}
+
 export function TimerButton() {
   const [isRunning, setIsRunning] = useState(false)
   const [isPaused, setIsPaused] = useState(false)
   const [currentId, setCurrentId] = useState<number | null>(null)
+  const [startTime, setStartTime] = useState<string | null>(null)
 
   const [elapsedSeconds, setElapsedSeconds] = useState(0)
   const [message, setMessage] = useState<string | null>(null)
@@ -50,6 +61,7 @@ export function TimerButton() {
     addTimer.mutate(now, {
       onSuccess: (newTimer) => {
         setCurrentId(newTimer.id)
+        setStartTime(now)
 
         setIsRunning(true)
         setIsPaused(false)
@@ -69,6 +81,7 @@ export function TimerButton() {
 
   const handleStop = async () => {
     const now = new Date().toTimeString().slice(0, 5)
+    const endTime = startTime ? calculateEndTime(startTime, elapsedSeconds) : now
 
     if (elapsedSeconds < 60) {
       // ❌ Удаляем созданный ранее таймер
@@ -80,6 +93,7 @@ export function TimerButton() {
       setIsPaused(false)
       setElapsedSeconds(0)
       setCurrentId(null)
+      setStartTime(null)
       if (timerRef.current) clearInterval(timerRef.current)
       localStorage.removeItem(STORAGE_KEY)
       showMessage('⛔ Меньше минуты не сохраняем:)')
@@ -88,13 +102,14 @@ export function TimerButton() {
 
     if (currentId) {
       stopTimer.mutate(
-        { id: currentId, endTime: now },
+        { id: currentId, endTime: endTime },
         {
           onSuccess: () => {
             setIsRunning(false)
             setIsPaused(false)
             setElapsedSeconds(0)
             setCurrentId(null)
+            setStartTime(null)
             if (timerRef.current) clearInterval(timerRef.current)
             localStorage.removeItem(STORAGE_KEY)
             showMessage('✅ Таймер успешно сохранён')
@@ -107,10 +122,11 @@ export function TimerButton() {
   useEffect(() => {
     const saved = localStorage.getItem(STORAGE_KEY)
     if (saved) {
-      const { id, timestamp } = JSON.parse(saved)
+      const { id, timestamp, startTime: savedStart } = JSON.parse(saved)
       const diffSeconds = Math.floor((Date.now() - timestamp) / 1000)
 
       setCurrentId(id)
+      setStartTime(savedStart)
 
       setIsRunning(true)
       setIsPaused(false)
