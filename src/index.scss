@@ -176,9 +176,11 @@ body {
   }
   &--pause {
     font-size: 1.4rem;
+    margin-right: 1rem;
   }
   &--paused {
-    background-color: $color-accent;
+    background-color: $color-warning;
+    margin-right: 1rem;
   }
 }
 
