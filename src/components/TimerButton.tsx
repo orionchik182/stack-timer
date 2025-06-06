@@ -7,6 +7,7 @@ const STORAGE_KEY = 'activeTimer'
 
 export function TimerButton() {
   const [isRunning, setIsRunning] = useState(false)
+  const [isPaused, setIsPaused] = useState(false)
   const [currentId, setCurrentId] = useState<number | null>(null)
 
   const [elapsedSeconds, setElapsedSeconds] = useState(0)
@@ -17,6 +18,16 @@ export function TimerButton() {
 
   const addTimer = useAddTimer()
   const stopTimer = useStopTimer()
+
+  const handlePauseToggle = () => {
+    if (isPaused) {
+      startInterval(elapsedSeconds)
+      setIsPaused(false)
+    } else {
+      if (timerRef.current) clearInterval(timerRef.current)
+      setIsPaused(true)
+    }
+  }
 
   const startInterval = (initialSeconds = 0) => {
     setElapsedSeconds(initialSeconds)
@@ -41,6 +52,7 @@ export function TimerButton() {
         setCurrentId(newTimer.id)
 
         setIsRunning(true)
+        setIsPaused(false)
         startInterval(0)
 
         localStorage.setItem(
@@ -65,6 +77,7 @@ export function TimerButton() {
       }
 
       setIsRunning(false)
+      setIsPaused(false)
       setElapsedSeconds(0)
       setCurrentId(null)
       if (timerRef.current) clearInterval(timerRef.current)
@@ -79,6 +92,7 @@ export function TimerButton() {
         {
           onSuccess: () => {
             setIsRunning(false)
+            setIsPaused(false)
             setElapsedSeconds(0)
             setCurrentId(null)
             if (timerRef.current) clearInterval(timerRef.current)
@@ -99,6 +113,7 @@ export function TimerButton() {
       setCurrentId(id)
 
       setIsRunning(true)
+      setIsPaused(false)
       startInterval(diffSeconds)
     }
 
@@ -118,6 +133,14 @@ export function TimerButton() {
           {isRunning ? 'Стоп' : 'Старт'}
         </button>
         <span className="tik-tak">{formatTime(elapsedSeconds)}</span>
+        {isRunning && (
+          <button
+            onClick={handlePauseToggle}
+            className={`btn btn--main btn--pause${isPaused ? ' btn--paused' : ''}`}
+          >
+            II
+          </button>
+        )}
       </div>
 
       {message && <div className="message">{message}</div>}
